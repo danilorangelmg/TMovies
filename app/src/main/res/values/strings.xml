@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TMovies</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_moviefeature">Movie</string>
+</resources>
