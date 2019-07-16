@@ -5,21 +5,31 @@ import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import br.com.tmovies.movies.di.loadKoinFeatures
-import kotlinx.android.synthetic.main.movie_activity.*
+import kotlinx.android.synthetic.main.activity_movie.*
 
 class MovieActivity: AppCompatActivity() {
 
     val searchLiveData = MutableLiveData<String>()
+    val toolbarTitleLiveData = MutableLiveData<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadKoinFeatures()
-        setContentView(R.layout.movie_activity)
+        setContentView(R.layout.activity_movie)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        setupToolbar()
+
+    }
+
+    private fun setupToolbar() {
         setupSearchView()
+        toolbarTitleLiveData.observe(this, Observer {
+            tvToolbarTitle.text = it
+        })
     }
 
     private fun setupSearchView() {

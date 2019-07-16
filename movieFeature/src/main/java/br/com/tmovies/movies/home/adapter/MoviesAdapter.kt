@@ -8,7 +8,7 @@ import br.com.tmovies.common.extensions.formatStrDate
 import br.com.tmovies.common.extensions.loadImageUrl
 import br.com.tmovies.domain.movie.MovieModel
 import br.com.tmovies.movies.R
-import kotlinx.android.synthetic.main.movie_list_item.view.*
+import kotlinx.android.synthetic.main.item_movie_list.view.*
 import java.util.*
 
 class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.ItemViewHolder>() {
@@ -17,7 +17,7 @@ class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.ItemViewHolder>() {
     private val allItems = LinkedList<MovieModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false)
         return ItemViewHolder(view)
     }
 

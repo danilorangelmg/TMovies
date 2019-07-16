@@ -1,6 +1,5 @@
 package br.com.tmovies.movies.home
 
-import android.graphics.Movie
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.example.koinsample.ui.home.HomeViewModel
+import br.com.tmovies.common.extensions.showErrorDialogTryAgain
 import br.com.tmovies.movies.MovieActivity
 import br.com.tmovies.movies.R
 import br.com.tmovies.movies.home.adapter.MoviesAdapter
@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(viewModel)
+        (activity as MovieActivity).toolbarTitleLiveData.value = getString(R.string.title_movie_feature)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,6 +52,12 @@ class HomeFragment : Fragment() {
 
         viewModel.moviesByNameLiveData.observe(this, Observer {
             (rvMoviesList.adapter as MoviesAdapter).addFilterItens(it)
+        })
+
+        viewModel.errorLiveData.observe(this, Observer {
+            showErrorDialogTryAgain(it) {
+                viewModel.loadMoreItems()
+            }
         })
     }
 

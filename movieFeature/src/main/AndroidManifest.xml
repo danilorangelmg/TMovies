@@ -4,7 +4,7 @@
     <dist:module
             dist:onDemand="false"
             dist:instant="false"
-            dist:title="@string/title_moviefeature">
+            dist:title="@string/title_movie_feature">
         <dist:fusing dist:include="true"/>
     </dist:module>
     <application>

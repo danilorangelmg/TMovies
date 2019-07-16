@@ -13,4 +13,8 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <style name="SpotlightBigTextView" parent="SpotlightTextView">
+        <item name="android:textSize">@dimen/big_text_size</item>
+    </style>
+
 </resources>
