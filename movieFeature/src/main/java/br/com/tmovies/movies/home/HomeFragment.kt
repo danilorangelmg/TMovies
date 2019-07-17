@@ -15,6 +15,7 @@ import br.com.tmovies.movies.R
 import br.com.tmovies.movies.helper.navigateToDetailFragment
 import br.com.tmovies.movies.helper.updateToolbarTitle
 import br.com.tmovies.movies.adapter.MoviesAdapter
+import br.com.tmovies.movies.helper.showBackButtonTootal
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +37,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initializeViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBackButtonTootal(false)
     }
 
     private fun initializeLiveData() {

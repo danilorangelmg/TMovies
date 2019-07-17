@@ -9,9 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tmovies.common.extensions.formatStrDate
 import br.com.tmovies.common.extensions.loadImageUrl
+import br.com.tmovies.common.extensions.showErrorDialogTryAgain
 import br.com.tmovies.movies.R
 import br.com.tmovies.movies.adapter.MoviesAdapter
 import br.com.tmovies.movies.helper.navigateToDetailFragment
+import br.com.tmovies.movies.helper.showBackButtonTootal
 import br.com.tmovies.movies.helper.updateToolbarTitle
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,6 +35,11 @@ class MovieDetailFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
+        showBackButtonTootal(true)
+        getMovie()
+    }
+
+    private fun getMovie() {
         arguments?.getString(MOVIE_ID)?.let { viewModel.getMovie(it) }
     }
 
@@ -59,6 +66,12 @@ class MovieDetailFragment: Fragment() {
                 }.apply {
                     addItems(it.results)
                 }
+            }
+        })
+
+        viewModel.errorLiveData.observe(this, Observer {
+            showErrorDialogTryAgain(it) {
+                getMovie()
             }
         })
     }

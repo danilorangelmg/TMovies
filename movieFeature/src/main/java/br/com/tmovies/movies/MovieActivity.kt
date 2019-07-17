@@ -15,6 +15,7 @@ class MovieActivity: AppCompatActivity() {
 
     val searchLiveData = MutableLiveData<String>()
     val toolbarTitleLiveData = MutableLiveData<String>()
+    val showBackButtonToolbarLiveData = MutableLiveData<Boolean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,11 @@ class MovieActivity: AppCompatActivity() {
         setupSearchView()
         toolbarTitleLiveData.observe(this, Observer {
             tvToolbarTitle.text = it
+        })
+
+        showBackButtonToolbarLiveData.observe(this, Observer {
+            searchView.visibility = if (it) View.GONE else View.VISIBLE
+            supportActionBar?.setDisplayHomeAsUpEnabled(it)
         })
     }
 

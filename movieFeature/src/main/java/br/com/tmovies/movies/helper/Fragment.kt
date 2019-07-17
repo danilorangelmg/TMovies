@@ -11,6 +11,10 @@ fun Fragment.updateToolbarTitle(@StringRes title: Int) {
     (activity as MovieActivity).toolbarTitleLiveData.value = getString(title)
 }
 
+fun Fragment.showBackButtonTootal(showBackButtonToolbar: Boolean) {
+    (activity as MovieActivity).showBackButtonToolbarLiveData.value = showBackButtonToolbar
+}
+
 fun Fragment.navigateToDetailFragment(movieId: String) {
     (activity as MovieActivity).getNavController().navigate(R.id.fragmentDetail, Bundle().apply {
         putString(MOVIE_ID, movieId)
