@@ -12,7 +12,9 @@ import br.com.example.koinsample.ui.home.HomeViewModel
 import br.com.tmovies.common.extensions.showErrorDialogTryAgain
 import br.com.tmovies.movies.MovieActivity
 import br.com.tmovies.movies.R
-import br.com.tmovies.movies.home.adapter.MoviesAdapter
+import br.com.tmovies.movies.helper.navigateToDetailFragment
+import br.com.tmovies.movies.helper.updateToolbarTitle
+import br.com.tmovies.movies.adapter.MoviesAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +26,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(viewModel)
-        (activity as MovieActivity).toolbarTitleLiveData.value = getString(R.string.title_movie_feature)
+        updateToolbarTitle(R.string.title_movie_feature)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -64,7 +66,9 @@ class HomeFragment : Fragment() {
     private fun initializeViews() {
         rvMoviesList.apply {
             layoutManager = GridLayoutManager(activity, 2)
-            adapter = MoviesAdapter()
+            adapter = MoviesAdapter {
+                navigateToDetailFragment(it.id.toString())
+            }
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)

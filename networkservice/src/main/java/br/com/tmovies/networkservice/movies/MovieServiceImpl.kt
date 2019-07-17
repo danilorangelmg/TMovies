@@ -2,6 +2,7 @@ package br.com.tmovies.networkservice.movies
 
 import br.com.tmovies.networkservice.config.NetworkException
 import br.com.tmovies.networkservice.config.ServiceConfiguration
+import br.com.tmovies.networkservice.model.MovieDetailResponse
 import br.com.tmovies.networkservice.model.MoviesResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,6 +32,28 @@ class MovieServiceImpl : MovieService {
         try {
             return withContext(Dispatchers.IO) {
                 movieApi.getMoviesByName(movieName)
+            }
+        } catch (e: Exception) {
+            throw NetworkException(ERROR_MESSAGE)
+        }
+    }
+
+    @Throws(NetworkException::class)
+    override suspend fun getMoviesDetail(movieId: String): MovieDetailResponse {
+        try {
+            return withContext(Dispatchers.IO) {
+                movieApi.getMoviesDetail(movieId)
+            }
+        } catch (e: Exception) {
+            throw NetworkException(ERROR_MESSAGE)
+        }
+    }
+
+    @Throws(NetworkException::class)
+    override suspend fun getSimilarMovies(movieId: String): MoviesResponse {
+        try {
+            return withContext(Dispatchers.IO) {
+                movieApi.getSimilarMovies(movieId)
             }
         } catch (e: Exception) {
             throw NetworkException(ERROR_MESSAGE)

@@ -6,6 +6,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.com.tmovies.movies.di.loadKoinFeatures
 import kotlinx.android.synthetic.main.activity_movie.*
@@ -63,7 +64,11 @@ class MovieActivity: AppCompatActivity() {
         })
     }
 
+    fun getNavController(): NavController {
+        return Navigation.findNavController(this, R.id.nav_host)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        return Navigation.findNavController(this, R.id.nav_host).navigateUp()
+        return getNavController().navigateUp()
     }
 }

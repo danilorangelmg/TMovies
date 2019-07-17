@@ -9,5 +9,14 @@
             android:name="br.com.tmovies.movies.home.HomeFragment"
             android:label="Home"
             tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_home_to_detail"
+                app:destination="@id/fragmentDetail"/>
     </fragment>
+    <fragment
+            android:id="@+id/fragmentDetail"
+            android:name="br.com.tmovies.movies.detail.MovieDetailFragment"
+            android:label="Detail"
+            tools:layout="@layout/fragment_detail"/>
+
 </navigation>

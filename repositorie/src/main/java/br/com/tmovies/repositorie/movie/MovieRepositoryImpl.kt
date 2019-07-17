@@ -1,8 +1,10 @@
 package br.com.tmovies.repositorie.movie
 
+import br.com.tmovies.domain.movie.MovieDetailModel
 import br.com.tmovies.domain.movie.MoviesModel
 import br.com.tmovies.networkservice.movies.MovieServiceImpl
 import br.com.tmovies.repositorie.helper.exception.BusinessException
+import br.com.tmovies.repositorie.movie.mapper.toMovieDetailModel
 import br.com.tmovies.repositorie.movie.mapper.toMoviesModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -32,4 +34,25 @@ class MovieRepositoryImpl : MovieRepository {
         }
     }
 
+    @Throws(BusinessException::class)
+    override fun getMovieDetail(movieId: String): MovieDetailModel {
+        try {
+            return runBlocking {
+                MovieServiceImpl().getMoviesDetail(movieId).toMovieDetailModel()
+            }
+        } catch (e: Exception) {
+            throw BusinessException(e.message)
+        }
+    }
+
+    @Throws(BusinessException::class)
+    override fun getSimilarMovies(movieId: String): MoviesModel {
+        try {
+            return runBlocking {
+                MovieServiceImpl().getSimilarMovies(movieId).toMoviesModel()
+            }
+        } catch (e: Exception) {
+            throw BusinessException(e.message)
+        }
+    }
 }

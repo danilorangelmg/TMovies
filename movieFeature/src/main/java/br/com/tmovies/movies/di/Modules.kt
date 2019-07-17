@@ -1,6 +1,7 @@
 package br.com.tmovies.movies.di
 
 import br.com.example.koinsample.ui.home.HomeViewModel
+import br.com.tmovies.movies.detail.MovieDetailViewModel
 import br.com.tmovies.repositorie.movie.ServiceModules
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
@@ -16,6 +17,7 @@ private val loadFeatures by lazy {
 
 val movieModule = module {
     viewModel { HomeViewModel(get()) }
+    viewModel { MovieDetailViewModel(get()) }
 }
 
 val repositorieModule = module {
