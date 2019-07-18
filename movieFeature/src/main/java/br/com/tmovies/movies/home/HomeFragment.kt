@@ -19,7 +19,6 @@ import br.com.tmovies.movies.helper.showBackButtonToolbar
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class HomeFragment : Fragment() {
 
     val viewModel: HomeViewModel by viewModel()
