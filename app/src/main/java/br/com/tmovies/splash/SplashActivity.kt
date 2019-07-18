@@ -16,17 +16,7 @@ class SplashActivity : AppCompatActivity() {
         val SPLASH_TIME_OUT: Long = 3000
 
         Handler().postDelayed({
-            // This method will be executed once the timer is over
-            // Start your app main activity
-
-//            val i = Intent(Intent.ACTION_VIEW).apply {
-//                setClassName("br.com.tmovies", "br.com.tmovies.movies.MovieActivity")
-//            }
-//            startActivity(i)
-
             startFeatureActivity("movies.MovieActivity")
-
-            // close this activity
             finish()
         }, SPLASH_TIME_OUT)
 
