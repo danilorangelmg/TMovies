@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class ServiceConfiguration() {
+class ServiceConfiguration {
 
     private val httpLoggingInterceptor by lazy {
         HttpLoggingInterceptor().apply {
@@ -27,14 +27,12 @@ class ServiceConfiguration() {
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
-//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
 
     fun <T> configureApiInterface(clazz: Class<T>): T {
         return retrofitService.create(clazz)
     }
-
 }
 
 

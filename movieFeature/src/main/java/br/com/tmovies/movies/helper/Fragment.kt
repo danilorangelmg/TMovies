@@ -11,7 +11,7 @@ fun Fragment.updateToolbarTitle(@StringRes title: Int) {
     (activity as MovieActivity).toolbarTitleLiveData.value = getString(title)
 }
 
-fun Fragment.showBackButtonTootal(showBackButtonToolbar: Boolean) {
+fun Fragment.showBackButtonToolbar(showBackButtonToolbar: Boolean) {
     (activity as MovieActivity).showBackButtonToolbarLiveData.value = showBackButtonToolbar
 }
 

@@ -8,14 +8,14 @@ import br.com.tmovies.repositorie.movie.MovieRepository
 
 class MovieDetailViewModel(private val repository: MovieRepository) : ViewModel(), LifecycleObserver {
 
-    val movieDetailLiveData = MutableLiveData<MovieDetailModel>()
-    val similarMoviesLiveData = MutableLiveData<MoviesModel>()
+    val loadItemLiveData = MutableLiveData<MovieDetailModel>()
+    val similarItemsLiveData = MutableLiveData<MoviesModel>()
     val errorLiveData = MutableLiveData<String>()
 
     fun getMovie(movieId: String) {
         try {
-            movieDetailLiveData.value = repository.getMovieDetail(movieId)
-            similarMoviesLiveData.value = repository.getSimilarMovies(movieId)
+            loadItemLiveData.value = repository.getMovieDetail(movieId)
+            similarItemsLiveData.value = repository.getSimilarMovies(movieId)
         } catch (e: BusinessException) {
             errorLiveData.value = e.message
         }

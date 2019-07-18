@@ -15,7 +15,7 @@ import br.com.tmovies.movies.R
 import br.com.tmovies.movies.helper.navigateToDetailFragment
 import br.com.tmovies.movies.helper.updateToolbarTitle
 import br.com.tmovies.movies.adapter.MoviesAdapter
-import br.com.tmovies.movies.helper.showBackButtonTootal
+import br.com.tmovies.movies.helper.showBackButtonToolbar
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,11 +41,11 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        showBackButtonTootal(false)
+        showBackButtonToolbar(false)
     }
 
     private fun initializeLiveData() {
-        viewModel.moviesLiveData.observe(this, Observer {
+        viewModel.itemsLiveData.observe(this, Observer {
             (rvMoviesList.adapter as MoviesAdapter).addItems(it)
         })
 
@@ -53,12 +53,11 @@ class HomeFragment : Fragment() {
             if (it.isNullOrEmpty()) {
                 (rvMoviesList.adapter as MoviesAdapter).clearFilter()
             } else {
-                viewModel.loadMoviesByName(it)
+                viewModel.onItemClick(it)
             }
-
         })
 
-        viewModel.moviesByNameLiveData.observe(this, Observer {
+        viewModel.itemsFilterLiveData.observe(this, Observer {
             (rvMoviesList.adapter as MoviesAdapter).addFilterItens(it)
         })
 

@@ -13,7 +13,7 @@ import br.com.tmovies.common.extensions.showErrorDialogTryAgain
 import br.com.tmovies.movies.R
 import br.com.tmovies.movies.adapter.MoviesAdapter
 import br.com.tmovies.movies.helper.navigateToDetailFragment
-import br.com.tmovies.movies.helper.showBackButtonTootal
+import br.com.tmovies.movies.helper.showBackButtonToolbar
 import br.com.tmovies.movies.helper.updateToolbarTitle
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,7 +35,7 @@ class MovieDetailFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        showBackButtonTootal(true)
+        showBackButtonToolbar(true)
         getMovie()
     }
 
@@ -48,7 +48,7 @@ class MovieDetailFragment: Fragment() {
     }
 
     private fun initLiveData() {
-        viewModel.movieDetailLiveData.observe(this, Observer {
+        viewModel.loadItemLiveData.observe(this, Observer {
             ivPoster.loadImageUrl(it.getBackDrop())
             tvMovieName.text = it.original_title
             imgLogo.loadImageUrl(it.getPoster())
@@ -58,7 +58,7 @@ class MovieDetailFragment: Fragment() {
             tvYear.text = it.release_date.formatStrDate("yyyy-MM-dd", "yyyy")
         })
 
-        viewModel.similarMoviesLiveData.observe(this, Observer {
+        viewModel.similarItemsLiveData.observe(this, Observer {
             rvMoviesList.apply {
                 layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                 adapter = MoviesAdapter(true) {

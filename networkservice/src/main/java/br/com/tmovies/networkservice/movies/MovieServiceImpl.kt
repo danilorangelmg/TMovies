@@ -6,6 +6,7 @@ import br.com.tmovies.networkservice.model.MovieDetailResponse
 import br.com.tmovies.networkservice.model.MoviesResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import java.lang.Exception
 
 class MovieServiceImpl : MovieService {
@@ -22,7 +23,7 @@ class MovieServiceImpl : MovieService {
              return withContext(Dispatchers.IO) {
                 movieApi.getLastMovies(sort, year, page)
             }
-        } catch (e: Exception) {
+        } catch (e: HttpException) {
             throw NetworkException(ERROR_MESSAGE)
         }
     }
@@ -33,7 +34,7 @@ class MovieServiceImpl : MovieService {
             return withContext(Dispatchers.IO) {
                 movieApi.getMoviesByName(movieName)
             }
-        } catch (e: Exception) {
+        } catch (e: HttpException) {
             throw NetworkException(ERROR_MESSAGE)
         }
     }
@@ -44,7 +45,7 @@ class MovieServiceImpl : MovieService {
             return withContext(Dispatchers.IO) {
                 movieApi.getMoviesDetail(movieId)
             }
-        } catch (e: Exception) {
+        } catch (e: HttpException) {
             throw NetworkException(ERROR_MESSAGE)
         }
     }
@@ -55,9 +56,8 @@ class MovieServiceImpl : MovieService {
             return withContext(Dispatchers.IO) {
                 movieApi.getSimilarMovies(movieId)
             }
-        } catch (e: Exception) {
+        } catch (e: HttpException) {
             throw NetworkException(ERROR_MESSAGE)
         }
     }
-
 }

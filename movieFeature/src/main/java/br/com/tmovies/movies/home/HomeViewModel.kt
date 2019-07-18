@@ -7,8 +7,8 @@ import br.com.tmovies.repositorie.movie.MovieRepository
 class HomeViewModel(private val repository: MovieRepository) : ViewModel(), LifecycleObserver {
 
     val errorLiveData = MutableLiveData<String>()
-    val moviesLiveData = MutableLiveData<List<MovieModel>>()
-    val moviesByNameLiveData = MutableLiveData<List<MovieModel>>()
+    val itemsLiveData = MutableLiveData<List<MovieModel>>()
+    val itemsFilterLiveData = MutableLiveData<List<MovieModel>>()
 
     private var currentPage = 0
     private var totalPages = 0
@@ -23,9 +23,13 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel(), Life
         loadMovies()
     }
 
-    fun loadMoviesByName(name: String) {
+    fun onItemClick(param: String) {
+        loadMoviesByName(param)
+    }
+
+    private fun loadMoviesByName(name: String) {
         try {
-            moviesByNameLiveData.value = repository.getMoviesByName(name).results
+            itemsFilterLiveData.value = repository.getMoviesByName(name).results
         } catch (e: Exception) {
             errorLiveData.value = e.message
         }
@@ -37,7 +41,7 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel(), Life
                 currentPage++
                 val response = repository.getMovies("popularity", "2019", currentPage.toString())
                 totalPages = response.totalPages
-                moviesLiveData.value = response.results
+                itemsLiveData.value = response.results
             }
         } catch (e: Exception) {
             currentPage--
