@@ -28,3 +28,7 @@
 - :networkService -> Network(Rest) engine, coordinates retrofit calls
 - :repositorie: interface and coordinates service calls from features
 - :databaseService ->  Database Engine(Not Implement)
+
+# TO FIX
+    - Dependency injection organization
+    - Network error flow
